@@ -1,0 +1,7 @@
+<li class="list-group-item">
+  <div class="div-de-status" *ngIf="deviceStatus === 'Off'"></div>
+  <h4>Device: {{ deviceName }} -- Status : {{ getSatus() }}</h4>
+  <label>
+    <input type="text" class="form-control" [(ngModel)]="deviceName">
+  </label>
+</li>
