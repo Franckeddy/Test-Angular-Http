@@ -9,8 +9,10 @@ export class DeviceComponent implements OnInit {
 
   @Input() deviceName: string;
   @Input() deviceStatus: string;
+  @Input() indexOfDevice: number;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
@@ -19,4 +21,11 @@ export class DeviceComponent implements OnInit {
     return this.deviceStatus;
   }
 
+  getColor() {
+    if (this.deviceStatus === 'On') {
+      return 'green';
+    } else if (this.deviceStatus === 'Off') {
+      return 'red';
+    }
+  }
 }
