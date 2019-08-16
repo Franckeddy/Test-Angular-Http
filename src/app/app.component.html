@@ -1,10 +1,18 @@
 <nav class="navbar navbar-light bg-light">
-  <form class="form-inline">
-    <button class="btn btn-outline-success" type="button" routerLinkActive="active" routerLink="auth">Authentification</button>
-    <button class="btn btn-sm btn-outline-secondary" type="button" routerLinkActive="active" routerLink="devices">Devices</button>
-  </form>
-  <div class="navbar-right">
-    <p>Vous etes connecté depuis {{ secondes }} sec</p>
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li class="btn btn-outline-success" type="button" routerLinkActive="active" routerLink="auth">
+        Authentification
+      </li>
+      <li class="btn btn-sm btn-outline-secondary" type="button" routerLinkActive="active" routerLink="devices">
+        Devices
+      </li>
+      <li routerLinkActive="active"><a routerLink="edit">Nouvel appareil</a></li>
+      <li routerLinkActive="active"><a routerLink="users">Utilisateur</a></li>
+    </ul>
+    <div class="navbar-right">
+      <p>Vous etes connecté depuis {{ secondes }} sec</p>
+    </div>
   </div>
 </nav>
 <div class="container">
