@@ -1,0 +1,17 @@
+<div class="col-lg-12">
+  <h2>Mes Devices</h2>
+  <p>Mise à jour: {{ lastUpdate | async | date: 'short' }}</p>
+  <ul class="list-group">
+    <app-device *ngFor="let device of devices; let i = index"
+                [indexOfDevice]="i"
+                [deviceName]="device.name"
+                [deviceStatus]="device.status"
+                [id]="device.id"></app-device>
+  </ul>
+  <button class="btn btn-success"
+          (click)="onTurnOn()">All ON
+  </button>
+  <button (click)="onTurnOff()"
+          class="btn btn-danger">All OFF
+  </button>
+</div>
