@@ -1,44 +1,31 @@
-import {Component, OnInit} from '@angular/core';
-import {DeviceService} from './services/device.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
-export class AppComponent implements OnInit {
-  isAuth = false;
+export class AppComponent implements OnInit, OnDestroy {
 
-  lastUpdate = new Promise(
-    (resolve, reject) => {
-      const date = new Date();
-      setTimeout(
-        () => {
-          resolve(date);
-        }, 2000
-      );
-    }
-  );
+  secondes: number;
+  counterSubscription: Subscription;
 
-  devices: any[];
+  constructor() {
+  }
 
-  constructor(private deviceService: DeviceService) {
-    setTimeout(
-      () => {
-        this.isAuth = true;
-      }, 4000
+  ngOnInit() {
+    const counter = Observable.interval(1000);
+    this.counterSubscription = counter.subscribe(
+      (value: number) => {
+        this.secondes = value;
+      }
     );
   }
 
-  ngOnInit(): void {
-    this.devices = this.deviceService.devices;
-  }
-
-  onTurnOn() {
-    this.deviceService.switchOnAll();
-  }
-
-  onTurnOff() {
-    this.deviceService.switchOffAll();
+  ngOnDestroy(): void {
+    this.counterSubscription.unsubscribe();
   }
 }
