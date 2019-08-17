@@ -1,25 +1,14 @@
 import {Subject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class DeviceService {
 
   deviceSubject = new Subject<any[]>();
-  private devices = [
-    {
-      id: 1,
-      name: 'Télévision',
-      status: 'Off'
-    },
-    {
-      id: 2,
-      name: 'Ordinateur',
-      status: 'On'
-    },
-    {
-      id: 3,
-      name: 'Tablette',
-      status: 'Off'
-    }
-  ];
+  private devices = [];
+
+  constructor(private httpClient: HttpClient){}
 
   emitDeviceSubject() {
     this.deviceSubject.next(this.devices.slice());
@@ -69,5 +58,32 @@ export class DeviceService {
     deviceObject.id = this.devices[(this.devices.length - 1)].id + 1;
     this.devices.push(deviceObject);
     this.emitDeviceSubject();
+  }
+
+  saveDeviceToServer(){
+    this.httpClient
+      .put('https://http-portfolio.firebaseio.com/devices.json', this.devices)
+      .subscribe(
+        () => {
+          console.log('Enregistrement terminé !');
+        },
+        (error) => {
+          console.log('Erreur de sauvegarde ! ' + error);
+        }
+      )
+  }
+
+  getDeviceFromServer() {
+    this.httpClient
+      .get<any[]>('https://http-portfolio.firebaseio.com/devices.json')
+      .subscribe(
+        (response) => {
+          this.devices = response;
+          this.emitDeviceSubject();
+        },
+        (error) => {
+          console.log('Erreur de chargement ! ' + error);
+        }
+      )
   }
 }

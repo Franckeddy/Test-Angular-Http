@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {MyComponentComponent} from './my-component/my-component.component';
 import {FormsModule, NgForm, ReactiveFormsModule} from '@angular/forms';
 import {DeviceComponent} from './device/device.component';
+import {HttpClientModule} from '@angular/common/http';
 
 import {DeviceService} from './services/device.service';
 import {AuthComponent} from './auth/auth.component';
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

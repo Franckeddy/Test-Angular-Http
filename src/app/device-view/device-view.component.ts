@@ -47,4 +47,12 @@ export class DeviceViewComponent implements OnInit {
   onTurnOff() {
     this.deviceService.switchOffAll();
   }
+
+  onSave() {
+    this.deviceService.saveDeviceToServer();
+  }
+
+  onFetch() {
+    this.deviceService.getDeviceFromServer();
+  }
 }
